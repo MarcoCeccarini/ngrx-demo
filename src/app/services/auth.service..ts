@@ -9,7 +9,8 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8005/auth'; // Replace with your API URL
+  //private apiUrl = 'http://localhost:8005/api/auth'; // Replace with your API URL
+  private apiUrl = 'http://localhost:4200/api/auth'; // Replace with your API URL
 
   constructor(private http: HttpClient) {}
 

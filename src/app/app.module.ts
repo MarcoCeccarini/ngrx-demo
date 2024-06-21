@@ -10,15 +10,22 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service.';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CorsInterceptorService } from './services/cors-interceptor.service';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports:      [CommonModule, BrowserModule, HttpClientModule, RouterOutlet, AppRoutingModule, FormsModule ,ReactiveFormsModule],
-  declarations: [ AppComponent, LoginComponent ],
+  declarations: [ AppComponent, LoginComponent, DashboardComponent ],
   providers: [
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CorsInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
       multi: true
     }
   ],
