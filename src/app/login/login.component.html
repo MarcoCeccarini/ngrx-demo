@@ -1,0 +1,13 @@
+<p>login works!</p>
+
+
+<form [formGroup]="frm" (ngSubmit)="onSubmit()">
+    <label for="username">Name: </label>
+    <input id="username" type="text" formControlName="username">
+    <div *ngIf="frm.get('username').invalid && (frm.get('username').dirty || frm.get('username').touched)">
+        Please provide a name.
+    </div>
+    <label for="password">Password: </label>
+    <input id="password" type="text" formControlName="password">
+    <button type="submit">login</button>
+</form>
