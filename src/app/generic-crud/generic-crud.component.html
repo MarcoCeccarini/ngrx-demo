@@ -1,0 +1,34 @@
+<!-- generic-crud.component.html -->
+<div>
+    <h2>{{ entityName }} List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">{{ column }}</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td *ngFor="let column of columns">{{ item[column] }}</td>
+          <td>
+            <button (click)="edit(item)">Edit</button>
+            <button (click)="delete(item['id'])">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="selectedItem">
+      <h2>{{ isNew ? 'Create' : 'Edit' }} {{ entityName }}</h2>
+      <form (ngSubmit)="save()">
+        <div *ngFor="let column of columns">
+          <label>{{ column }}:</label>
+          <input [(ngModel)]="selectedItem[column]" name="{{ column }}">
+        </div>
+        <button type="submit">Save</button>
+        <button type="button" (click)="cancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  

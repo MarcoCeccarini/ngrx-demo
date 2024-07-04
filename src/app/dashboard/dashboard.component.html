@@ -1,7 +1,45 @@
 <p>dashboard works!</p>
 <ul>
     <li *ngFor="let item of users; index as i">
-      {{i+1}} {{item}}
+      {{i+1}} {{item.email}}
+      <app-dashboard-detail *ngIf="isVisible" [item]="item" (onNotify)="handleNotification($event)">
+        <p>This is projected content from the parent!</p>
+      </app-dashboard-detail>
+      <button (click)="toggleVisibility()">
+        {{ isVisible ? 'Hide' : 'Show' }} Element
+      </button>
     </li>
   </ul>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Define Columns -->
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
   
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  <ng-template #myTemplate>
+    <p>This content is inside an ng-template and will be rendered later.</p>
+  </ng-template>
+  
+  
+  <ng-container *ngIf="isVisible">
+    <ng-container *ngTemplateOutlet="myTemplate"></ng-container>
+  </ng-container>
+
+  <!--ngb-toast header="I can be closed!" (hidden)="isVisible">
+    Toast
+  </ngb-toast-->
+  <!--ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+  </ngb-alert-->

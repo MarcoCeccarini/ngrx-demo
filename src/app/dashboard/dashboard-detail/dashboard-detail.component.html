@@ -1,0 +1,8 @@
+<p>dashboard-detail works!</p>
+<ng-content></ng-content>
+<div *ngIf="item" class="row">
+    <p class="col-md-5">ID: {{ item.id }}</p>
+    <p class="col-md-5">Name: {{ item.fullName }}</p>
+    <p class="col-md-5">Description: {{ item.email }}</p>
+  </div>
+  <button class="btn btn-primary" (click)="sendNotification()">Send Notification</button>
